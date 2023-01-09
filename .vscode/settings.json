@@ -1,0 +1,9 @@
+{
+  "cmake.configureSettings": {
+  },
+  "search.exclude": {
+    "bin/": true,
+    "build/": true,
+    "install/": true
+  }
+}
