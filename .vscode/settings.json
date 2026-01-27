@@ -2,9 +2,9 @@
   "cmake.configureSettings": {
   },
   "search.exclude": {
-    "bin/": true,
-    "build/": true,
-    "docs/": true,
-    "install/": true
+	"bin/": true,
+	"build/": true,
+	"docs/": true,
+	"install/": true
   }
 }
