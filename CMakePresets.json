@@ -2,7 +2,7 @@
 	"version": 3,
 	"configurePresets": [
 		{
-			"name": "Default",
+			"name": "demo",
 			"generator": "Visual Studio 18 2026",
 			"binaryDir": "${sourceDir}/build"
 		}
@@ -10,12 +10,12 @@
 	"buildPresets": [
 		{
 			"name": "Debug",
-			"configurePreset": "Default",
+			"configurePreset": "demo",
 			"configuration": "Debug"
 		},
 		{
 			"name": "Release",
-			"configurePreset": "Default",
+			"configurePreset": "demo",
 			"configuration": "Release"
 		}
 	]
