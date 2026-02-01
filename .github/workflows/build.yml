@@ -7,12 +7,12 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
+  # ----------------------------------------------------------------
+  # Windows
+  # ----------------------------------------------------------------
 
-    strategy:
-      matrix:
-        os: [ windows-latest, ubuntu-latest ]
+  build-windows:
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -21,21 +21,44 @@ jobs:
       # Compiler
       # ----------------------------------------------------------------
 
-      - name: Compiler - Windows
-        if: runner.os == 'Windows'
+      - name: Compiler
         uses: ilammy/msvc-dev-cmd@v1
 
       # ----------------------------------------------------------------
       # Configure
       # ----------------------------------------------------------------
 
-      - name: Configure - Windows
-        if: runner.os == 'Windows'
+      - name: Configure
         run: |
           cmake --preset demo-windows
 
-      - name: Configure - Linux
-        if: runner.os == 'Linux'
+      # ----------------------------------------------------------------
+      # Build
+      # ----------------------------------------------------------------
+
+      - name: Build - Debug
+        run: |
+          cmake --build build --config Debug
+
+      - name: Build - Release
+        run: |
+          cmake --build build --config Release
+
+  # ----------------------------------------------------------------
+  # Linux
+  # ----------------------------------------------------------------
+
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ----------------------------------------------------------------
+      # Configure
+      # ----------------------------------------------------------------
+
+      - name: Configure
         run: |
           cmake --preset demo-linux
 
