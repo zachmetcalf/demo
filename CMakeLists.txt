@@ -29,6 +29,7 @@ set(SOURCE_FILES
 
 add_executable(${PROJECT_TARGET} ${SOURCE_FILES} ${HEADER_FILES})
 
+set_source_files_properties(${HEADER_FILES} PROPERTIES HEADER_FILE_ONLY ON)
 target_include_directories(${PROJECT_TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 message("building project ${PROJECT_NAME}...")
