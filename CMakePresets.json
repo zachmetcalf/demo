@@ -1,22 +1,58 @@
 {
-	"version": 3,
-	"configurePresets": [
-		{
-			"name": "demo",
-			"generator": "Visual Studio 18 2026",
-			"binaryDir": "${sourceDir}/build"
-		}
-	],
-	"buildPresets": [
-		{
-			"name": "Debug",
-			"configurePreset": "demo",
-			"configuration": "Debug"
-		},
-		{
-			"name": "Release",
-			"configurePreset": "demo",
-			"configuration": "Release"
-		}
-	]
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "demo",
+            "hidden": true,
+            "generator": "Ninja Multi-Config",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_CONFIGURATION_TYPES": "Debug;Release"
+            }
+        },
+        {
+            "name": "demo-windows",
+            "inherits": "demo",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "cl",
+                "CMAKE_CXX_COMPILER": "cl"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        },
+        {
+            "name": "demo-linux",
+            "inherits": "demo",
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug-windows",
+            "configurePreset": "demo-windows",
+            "configuration": "Debug"
+        },
+        {
+            "name": "release-windows",
+            "configurePreset": "demo-windows",
+            "configuration": "Release"
+        },
+        {
+            "name": "debug-linux",
+            "configurePreset": "demo-linux",
+            "configuration": "Debug"
+        },
+        {
+            "name": "release-linux",
+            "configurePreset": "demo-linux",
+            "configuration": "Release"
+        }
+    ]
 }

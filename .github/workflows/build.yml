@@ -1,0 +1,52 @@
+# Copyright (c) 2026 Zach Metcalf. All Rights Reserved.
+
+name: demo - Build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ windows-latest, ubuntu-latest ]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ----------------------------------------------------------------
+      # Compiler
+      # ----------------------------------------------------------------
+
+      - name: Compiler - Windows
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      # ----------------------------------------------------------------
+      # Configure
+      # ----------------------------------------------------------------
+
+      - name: Configure - Windows
+        if: runner.os == 'Windows'
+        run: |
+          cmake --preset demo-windows
+
+      - name: Configure - Linux
+        if: runner.os == 'Linux'
+        run: |
+          cmake --preset demo-linux
+
+      # ----------------------------------------------------------------
+      # Build
+      # ----------------------------------------------------------------
+
+      - name: Build - Debug
+        run: |
+          cmake --build build --config Debug
+
+      - name: Build - Release
+        run: |
+          cmake --build build --config Release
