@@ -19,7 +19,11 @@ git clone --branch main https://github.com/zachmetcalf/zachmetcalf .
 
 popd
 
-call %tempdir%\scripts\standards.bat "%projectdir%"
+pushd "%tempdir%\scripts\standards"
+
+call .\standards.bat "%projectdir%"
+
+popd
 
 rmdir /s /q "%tempdir%"
 
