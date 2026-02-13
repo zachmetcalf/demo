@@ -1,8 +1,8 @@
 {
-	"folders": [
-		{
-			"name": "demo",
-			"path": "."
-		}
-	]
+    "folders": [
+        {
+            "name": "demo",
+            "path": "."
+        }
+    ]
 }
