@@ -8,36 +8,38 @@ on:
   push:
     branches: [ main ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-windows:
     runs-on: windows-latest
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Compiler
+      - name: Setup compiler
         uses: ilammy/msvc-dev-cmd@v1
 
       - name: Configure
         run: cmake --preset demo-windows
 
-      - name: Build - Debug
+      - name: Compile - Debug
         run: cmake --build --preset debug-windows
 
-      - name: Build - Release
+      - name: Compile - Release
         run: cmake --build --preset release-windows
 
   build-linux:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
       - name: Configure
         run: cmake --preset demo-linux
 
-      - name: Build - Debug
+      - name: Compile - Debug
         run: cmake --build --preset debug-linux
 
-      - name: Build - Release
+      - name: Compile - Release
         run: cmake --build --preset release-linux
