@@ -9,46 +9,23 @@ on:
     branches: [ main ]
 
 jobs:
-  # ----------------------------------------------------------------
-  # Windows
-  # ----------------------------------------------------------------
-
   build-windows:
     runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
 
-      # ----------------------------------------------------------------
-      # Compiler
-      # ----------------------------------------------------------------
-
       - name: Compiler
         uses: ilammy/msvc-dev-cmd@v1
 
-      # ----------------------------------------------------------------
-      # Configure
-      # ----------------------------------------------------------------
-
       - name: Configure
-        run: |
-          cmake --preset demo-windows
-
-      # ----------------------------------------------------------------
-      # Build
-      # ----------------------------------------------------------------
+        run: cmake --preset demo-windows
 
       - name: Build - Debug
-        run: |
-          cmake --build build --config Debug
+        run: cmake --build --preset debug-windows
 
       - name: Build - Release
-        run: |
-          cmake --build build --config Release
-
-  # ----------------------------------------------------------------
-  # Linux
-  # ----------------------------------------------------------------
+        run: cmake --build --preset release-windows
 
   build-linux:
     runs-on: ubuntu-latest
@@ -56,22 +33,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # ----------------------------------------------------------------
-      # Configure
-      # ----------------------------------------------------------------
-
       - name: Configure
-        run: |
-          cmake --preset demo-linux
-
-      # ----------------------------------------------------------------
-      # Build
-      # ----------------------------------------------------------------
+        run: cmake --preset demo-linux
 
       - name: Build - Debug
-        run: |
-          cmake --build build --config Debug
+        run: cmake --build --preset debug-linux
 
       - name: Build - Release
-        run: |
-          cmake --build build --config Release
+        run: cmake --build --preset release-linux
